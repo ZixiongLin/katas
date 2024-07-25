@@ -1,0 +1,2 @@
+# Katas to practice
+
