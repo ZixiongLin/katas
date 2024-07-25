@@ -1,4 +1,13 @@
-export class ArgumentMashaler{}
+export class ArgumentMashaler{
+    private booleanValue = false;
+
+    setBoolean(value:boolean){
+        this.booleanValue = value
+    }
+    getBoolean(){
+        return this.booleanValue
+    }
+}
 
 export class BooleanArgumentMashaler extends ArgumentMashaler{}
 
