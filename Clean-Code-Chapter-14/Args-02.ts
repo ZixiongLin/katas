@@ -1,6 +1,6 @@
 // Listign 14-7 Agrs.java (first draft)
 
-import { ArgumentMashaler, BooleanArgumentMashaler } from "./ArgumentMashaler";
+import { ArgumentMashaler, BooleanArgumentMashaler, StringArgumentMashaler } from "./ArgumentMashaler";
 
 enum ERROR{
     OK,
@@ -20,7 +20,7 @@ export class Args {
     valid:boolean = true;
     unexpectedArguments = new Set<string>();
     booleanArgs = new Map<string,ArgumentMashaler>()
-    stringArgs = new Map<string,string>()
+    stringArgs = new Map<string,ArgumentMashaler>()
     intArgs = new Map<string,number>();
     argsFound = new Set<string>()
     currentArgument:number;
@@ -86,7 +86,7 @@ export class Args {
         this.intArgs.set(elementId,0);
     }
     parseStringElement(elementId){
-        this.stringArgs.set(elementId,"");
+        this.stringArgs.set(elementId,new StringArgumentMashaler());
     }
     isStringSchemaElement(elementTail:string){
         return elementTail == "*"
@@ -162,7 +162,8 @@ export class Args {
     setStringArg(argChar){
         this.currentArgument++;
         try {
-            this.stringArgs.set(argChar, this.args[this.currentArgument])
+//            this.stringArgs.set(argChar, this.args[this.currentArgument])
+            this.stringArgs.get(argChar)?.setString(this.args[this.currentArgument])
         } catch (error) {
             this.valid = false;
             this.errorArgumentId = argChar;
@@ -232,7 +233,9 @@ export class Args {
     }
 
     getString(arg:string){
-        return this.blankIfNull(this.stringArgs.get(arg));
+//        return this.blankIfNull(this.stringArgs.get(arg));
+        let am= this.stringArgs.get(arg);
+        return am == null ? "" :am.getString();
     }
     getInt(arg:string){
         return this.zeroIfNull(this.intArgs.get(arg));

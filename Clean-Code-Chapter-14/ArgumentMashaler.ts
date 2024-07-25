@@ -1,11 +1,18 @@
 export class ArgumentMashaler{
     private booleanValue = false;
-
+    private stringValue;
     setBoolean(value:boolean){
         this.booleanValue = value
     }
     getBoolean(){
         return this.booleanValue
+    }
+    setString(s:string){
+        this.stringValue = s;
+    }
+
+    getString(){
+        return this.stringValue
     }
 }
 
