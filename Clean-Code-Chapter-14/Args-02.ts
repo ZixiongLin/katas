@@ -239,7 +239,8 @@ export class Args {
     }
 
     getBoolean(arg:string){
-        return this.falseIfNull(this.booleanArgs.get(arg)?.getBoolean());
+        let am = this.booleanArgs.get(arg)
+        return am != null && am.getBoolean();
     }
 
     isValid() {
