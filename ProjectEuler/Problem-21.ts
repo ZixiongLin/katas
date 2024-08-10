@@ -1,23 +1,29 @@
 let amicacles = new Set();
 const LIMIT = 10000
+
+/**
+ * @param n  less and equals number limit
+ * @returns array divisors of n (integers)
+ */
+const findDivisors = (n) => {
+    let result = []
+    for(let d = 1; d<=n/2;d++){
+        if(n % d == 0){
+            result.push(d);
+        }
+    }
+    return result
+}
+
 for(let i = 1; i<LIMIT;i++){
     if(amicacles.has(i)){continue}
     const a = i;
-    let ADivisors = []
-    for(let d = 1; d<=a/2;d++){
-        if(a % d == 0){
-            ADivisors.push(d);
-        }
-    }
+    let ADivisors = findDivisors(a)
+
     let b = ADivisors.reduce((acc,current) => {
         return acc + current
     },0)
-    let BDivisors = []
-    for(let d = 1; d<=b/2;d++){
-        if(b % d == 0){
-            BDivisors.push(d);
-        }
-    }
+    let BDivisors = findDivisors(b)
 
     let temp = BDivisors.reduce((acc,current) => {
         return acc + current
